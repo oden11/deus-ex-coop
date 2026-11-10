@@ -46,7 +46,8 @@ Decompiled with Ghidra headless: `re/out/HX.dll.c` (2,773 functions, C++ names p
 
 ## Steam relay (HXCoop)
 `steamlink/hxcoop.c`, built by `steamlink/build.sh` (Docker image with i686 mingw). See
-`steamlink/mock/` for the mock used in tests. Release zip: `tools/make_release.sh <version>`.
+`steamlink/mock/` for the mock used in tests. Release zip: `tools/make_release.sh <version>`
+(Python 3; run `pip install zopfli` once for the smallest zip, see tools/pack_zip.py).
 
 ## Live two-player test on one PC (by hand)
 Host: `HX.exe "01_NYC_UNATCOIsland?Listen?Game=HXFix.HXFixGameInfo?Mutator=HXFix.HXFixTestSoak" -log=Host.log`

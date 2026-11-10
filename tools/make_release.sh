@@ -3,6 +3,7 @@
 #   dist/src (installer, launchers, readme), game/System/HXFix.u + HXFix.int (run HXFix/build.sh first),
 #   steamlink/HXCoop.exe (steamlink/build.sh) and steamlink/redist/steam_api.dll
 #   (Steamworks.NET 2025.164.1 Windows-x86, sha256 fdafb7c6...65da, not in git).
+# Needs Python 3 ($PYTHON, default python); with the zopfli module (pip install zopfli) the zip is ~4% smaller.
 set -e
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 VER=${1:-$(date +%Y.%m.%d)}
@@ -15,5 +16,6 @@ printf '480' > "$OUT/HXCoop/steam_appid.txt"
 echo "$VER" > "$OUT/VERSION.txt"
 ZIP="$ROOT/dist/build/DeusEx-Coop-$VER.zip"
 rm -f "$ZIP"
-powershell -NoProfile -Command "Compress-Archive -Path '$(cygpath -w "$OUT")\*' -DestinationPath '$(cygpath -w "$ZIP")'"
+# Smallest plain zip that still opens anywhere, checked against $OUT before it returns.
+"${PYTHON:-python}" "$ROOT/tools/pack_zip.py" "$OUT" "$ZIP"
 echo "$ZIP"
